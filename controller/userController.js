@@ -57,6 +57,11 @@ const loginUser = async (req, res) => {
 
 const userDate = async (req, res) => {
     const { token } = req.body;
+
+    if (!token) {
+        return res.status(401).send({error: "Token error"})
+    }
+
     const userVerify = jwt.verify(token, process.env.JWT_SECRETE);
     const userID = userVerify.id
 
